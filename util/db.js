@@ -1,13 +1,15 @@
 const Sequelize = require('sequelize')
-const { DATABASE_URL } = require('./config')
+const { DATABASE_URL, TEST_DATABASE_URL } = require('./config')
+
+const databaseUrl = process.env.TESTING === 'true' ? TEST_DATABASE_URL : DATABASE_URL
 
 const sequelize = process.env.NODE_ENV === 'production'
-  ? new Sequelize(DATABASE_URL, {
+  ? new Sequelize(databaseUrl, {
       dialectOptions: {
         ssl: { require: true, rejectUnauthorized: false },
       },
     })
-  : new Sequelize(DATABASE_URL)
+  : new Sequelize(databaseUrl)
 
 const connectToDatabase = async () => {
   try {
