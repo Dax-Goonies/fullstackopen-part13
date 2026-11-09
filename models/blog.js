@@ -8,28 +8,40 @@ Blog.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   author: {
-    type: DataTypes.TEXT
+    type: DataTypes.TEXT,
   },
   url: {
     type: DataTypes.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   title: {
     type: DataTypes.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   likes: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0
+    defaultValue: 0,
+  },
+  year: {
+    type: DataTypes.INTEGER,
+    validate: {
+      min: {
+        args: [1991],
+        msg: 'year must be at least 1991',
+      },
+      max: {
+        args: [new Date().getFullYear()],
+        msg: `year cannot be later than ${new Date().getFullYear()}`,
+      }
+    }
   }
 }, {
   sequelize,
   underscored: true,
-  timestamps: false,
   modelName: 'blog'
 })
 
