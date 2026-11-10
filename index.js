@@ -7,7 +7,7 @@ const blogsRouter = require('./controllers/blogs')
 const loginRouter = require('./controllers/login')
 const resetRouter = require('./controllers/reset')
 const usersRouter = require('./controllers/users')
-const { syncModels } = require('./models')
+const readingListsRouter = require('./controllers/readingLists')
 
 const app = express()
 app.use(express.json())
@@ -21,6 +21,7 @@ app.use('/api/blogs', blogsRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/reset', resetRouter)
 app.use('/api/users', usersRouter)
+app.use('/api/readinglists', readingListsRouter)
 
 app.use(errorHandler)
 

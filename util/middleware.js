@@ -15,6 +15,7 @@ const errorHandler = (error, req, res, next) => {
   next(error)
 }
 
+// Check clearance with bearer header
 const tokenExtractor = (req, res, next) => {
   const authorization = req.get('authorization')
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
@@ -29,4 +30,10 @@ const tokenExtractor = (req, res, next) => {
   next()
 }
 
-module.exports = { errorHandler, tokenExtractor }
+// Find blog with its id
+const blogFinder = async (req, res, next) => {
+  req.blog = await Blog.findByPk(req.params.id)
+  next()
+}
+
+module.exports = { blogFinder, errorHandler, tokenExtractor }
