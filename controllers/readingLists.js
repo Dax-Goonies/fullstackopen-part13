@@ -11,13 +11,18 @@ router.post('/', async (req, res, next) => {
     const user = await User.findByPk(userId)
 
     if (!blog) {
-      return res.status(404).json({ error: 'invalid blog id'})
+      return res.status(400).json({ error: 'invalid blog id'})
     }
 
     if (!user) {
-      return res.status(404).json({ error: 'invalid user id'})      
+      return res.status(400).json({ error: 'invalid user id'})      
     }
 
+    const existing = await ReadingList.findOne({ where: blogId, userId })
+    if (existing) {
+      return res.status(400).json({ error: 'blog already in reading list' })
+    }
+    
     const reading = await ReadingList.create({ blogId, userId, read: false })
     res.status(201).json(reading)
   } catch (error) {
@@ -25,7 +30,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-// PUT:
+// PUT: Add/Remove blog to the reading list
 router.put('/:id', tokenExtractor, async (req, res, next) => {
   try {
     const reading = await ReadingList.findByPk(req.params.id)
