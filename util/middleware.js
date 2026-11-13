@@ -3,6 +3,7 @@ const { SECRET } = require('./config.js')
 const Blog = require('../models/blog')
 const Session =require('../models/session.js')
 
+// Error messages
 const errorHandler = (error, req, res, next) => {
   console.error(error.message)
 

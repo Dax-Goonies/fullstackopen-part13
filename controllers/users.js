@@ -1,5 +1,4 @@
 const router = require('express').Router()
-
 const { User, Blog } = require('../models')
 
 // GET: Fetch all users

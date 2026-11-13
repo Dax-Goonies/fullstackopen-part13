@@ -1,7 +1,5 @@
 const { Model, DataTypes } = require('sequelize')
-
 const { sequelize } = require('../util/db')
-
 class Blog extends Model {}
 
 Blog.init({
@@ -38,11 +36,11 @@ Blog.init({
         msg: `year cannot be later than ${new Date().getFullYear()}`,
       }
     }
-  }
+  },
 }, {
   sequelize,
   underscored: true,
-  modelName: 'blog'
+  modelName: 'blog',
 })
 
 module.exports = Blog

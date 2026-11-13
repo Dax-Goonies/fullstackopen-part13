@@ -1,12 +1,11 @@
 const { DataTypes } = require('sequelize')
-const { toDefaultValue } = require('sequelize/lib/utils')
 
 // MIGRATION: Add the possibility to disable a user & sessions
 module.exports= {
   up: async ({ context: queryInterface }) => {
     await queryInterface.addColumn('users', 'disabled', {
       type: DataTypes.BOOLEAN,
-      toDefaultValue: false,
+      defaultValue: false,
     })
 
     await queryInterface.createTable('sessions', {

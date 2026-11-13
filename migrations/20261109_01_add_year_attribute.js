@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 
-// MIGRATION: Adding year field attribute in blogs table with constraints
+// MIGRATION: Add year field attribute in blogs table with constraints
 module.exports = {
   up: async ({ context: queryInterface }) => {
     await queryInterface.addColumn('blogs', 'year', {

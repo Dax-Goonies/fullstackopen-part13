@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 
-// MIGRATION: Adding created_at & updated_at for users and blogs tables
+// MIGRATION: Add created_at & updated_at for users and blogs tables
 module.exports = {
   up: async ({ context: queryInterface }) => {
     await queryInterface.createTable('users', {

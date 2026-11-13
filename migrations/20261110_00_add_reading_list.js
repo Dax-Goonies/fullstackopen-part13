@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 
-// MIGRATION: Adding a join table reading_list between users and blogs
+// MIGRATION: Add a join table reading_list between users and blogs
 module.exports = {
   up: async ({ context: queryInterface }) => {
     await queryInterface.createTable('reading_lists', {

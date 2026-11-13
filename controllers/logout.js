@@ -1,14 +1,11 @@
 const router = require('express').Router()
 const { Session } = require('../models')
+const { tokenExtractor } = require('../util/middleware')
 
 // DELETE: Loging out remove the stored session
-router.delete('/', async (requestAnimationFrame, resizeBy, next) => {
+router.delete('/', tokenExtractor, async (req, res, next) => {
   try {
-    const authorization = requestAnimationFrame.get('authorization')
-    if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-      const token = authorization.substring(7)
-      await Session.destroy({ where: { token } })
-    }
+    await Session.destroy({ where: { userId: req.decodedToken.id } })
     res.status(204).end()
   } catch (error) {
     next(error)
